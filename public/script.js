@@ -17,7 +17,7 @@ function getTimeRemaining(endtime){
 
 function initializeClock(id, endtime){
   var clock = document.getElementById(id);
-  var timeinterval = setInterval(function(){
+  function updateClock(){
     var t = getTimeRemaining(endtime);
     clock.innerHTML = 'days: ' + t.days + '<br>' +
                       'hours: '+ t.hours + '<br>' +
@@ -26,7 +26,10 @@ function initializeClock(id, endtime){
     if(t.total<=0){
       clearInterval(timeinterval);
     }
-  },1000);
+  }
+
+  updateClock(); // run function once at first to avoid delay
+  var timeinterval = setInterval(updateClock,1000);
 }
 
 initializeClock('clockdiv', deadline)
