@@ -51,12 +51,12 @@
                 <a class="navbar-brand" href="index.html">alyandtj.com</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse timer" id="bs-example-navbar-collapse-1">
               <div id="clockdiv">
-                Days: <span class="days"></span><br>
-                   Hours: <span class="hours"></span><br>
-                   Minutes: <span class="minutes"></span><br>
-                   Seconds: <span class="seconds"></span>
+                <div id="clockElement"><span class="days clockNumber"></span>Days</div>
+                   <div id="clockElement"><span class="hours clockNumber"></span> Hours</div>
+                    <div id="clockElement"><span class="minutes clockNumber"></span> Minutes</div>
+                   <div id="clockElement"><span class="seconds clockNumber"></span> Seconds</div>
               </div>
             </div>
             <!-- /.navbar-collapse -->
@@ -80,13 +80,13 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img class="img-responsive img-full" src="img/slide-1.jpg" alt="">
+                                <img class="img-responsive img-full" src="img/one.jpg" alt="">
                             </div>
                             <div class="item">
-                                <img class="img-responsive img-full" src="img/slide-2.jpg" alt="">
+                                <img class="img-responsive img-full" src="img/two.jpg" alt="">
                             </div>
                             <div class="item">
-                                <img class="img-responsive img-full" src="img/slide-3.jpg" alt="">
+                                <img class="img-responsive img-full" src="img/three.jpg" alt="">
                             </div>
                         </div>
 
@@ -101,11 +101,11 @@
                     <h2 class="brand-before">
                         <small>Welcome to</small>
                     </h2>
-                    <h1 class="brand-name">Business Casual</h1>
+                    <h1 class="brand-name">The wedding countdown</h1>
                     <hr class="tagline-divider">
                     <h2>
                         <small>By
-                            <strong>Start Bootstrap</strong>
+                            <strong>Paul Borawski</strong>
                         </small>
                     </h2>
                 </div>
@@ -165,7 +165,7 @@
     <!-- Script to Activate the Carousel -->
     <script>
     $('.carousel').carousel({
-        interval: 5000 //changes the speed
+        interval: 4000 //changes the speed
     })
     </script>
     <script src="js/script.js"></script>

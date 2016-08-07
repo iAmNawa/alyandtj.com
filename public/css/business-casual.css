@@ -112,6 +112,34 @@ footer p {
     padding: 50px 0;
 }
 
+/* COUNTDOWN TIMER */
+
+#clockdiv {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: space-between;
+  justify-content: space-between;
+  padding: 25px 0px;
+  font-size: 25px;
+}
+
+.clockNumber {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+#clockElement {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
 @media screen and (min-width:768px) {
     .brand {
         display: inherit;
