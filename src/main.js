@@ -29,7 +29,7 @@ function tick(){
   loop.update(state)
 }
 
-setTimeout(()=>{
+setTimeout( function(){
   $('.carousel').carousel({
       interval: 4000 //changes the speed
   })
@@ -58,7 +58,7 @@ window.addEventListener('click', function(e){
       return $('.carousel').carousel('prev')
     return $('.carousel').carousel('next')
   }
-
+  
   if (e.target.classList[0] === 'icon-next')
     return $('.carousel').carousel('next')
 
@@ -72,6 +72,7 @@ window.addEventListener('click', function(e){
     console.log('clicked the submit msg button')
     submitter()
   }
+
 }, false)
 
 function submitter(){
