@@ -61,3 +61,12 @@ require('browserify')()
   .add('src/main.js')
   .bundle()
   .pipe(require('fs').createWriteStream('public/dot.js'))
+
+
+
+
+//// some deleting
+//db.createReadStream().on('data', function(data){
+//  console.log(data)
+//})
+//db.del('1470639164956')
