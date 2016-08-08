@@ -22,18 +22,16 @@ module.exports = function (state) {
             href:'/'
           }, 'alyandtj.com')
         ]),
-        h('.collapse.navbar-collapse.timer#bs-example-navbar-collapse-1', [
           h('#clockdiv', [
             h('#clockElement', [h('span.days.clockNumber', state.days +''), ' Days']),
             h('#clockElement', [h('span.hours.clockNumber', state.hours+''), ' Hours']),
             h('#clockElement', [h('span.minutes.clockNumber', state.mins+''), ' Minutes']),
             h('#clockElement', [h('span.seconds.clockNumber', state.secs+''), ' Seconds']),
           ])
-        ])
       ])
     ]),
     h('.container', [
-      h('.row.box', h('.col-lg-12.text-center', [
+      h('#noPadding.row.box', h('#noPadding2.col-lg-12.text-center', [
         h('#carousel-example-generic.carousel.slide', [
           h('ol.carousel-indicators.hidden-xs', [
             h('li.generic.active', {'data-target':'#carousel-example-generic', 'data-slide-to':'0'}),
@@ -75,7 +73,21 @@ module.exports = function (state) {
       ])),
       h('.row.box', [
         h('.col-lg-12.text-center', [
-          h('h3', 'reminder to update other stuff')
+          h('hr.tagline-divider'),
+          h('h2.intro-text.text-center', 'Alyson Julia Borawski and Thomas Joshua Esposito'),
+          h('hr.tagline-divider'),
+          h('img.img-responsive.img-border.img-left', {src:'/img/alytj.jpeg'}),
+          h('hr.tagline-divider.visible-xs'),
+          h('p', 'In January of 2006, TJ and Aly met on a chairlift ride at Heavenly Mountain Resort. They have been enjoying the ride ever since.'),
+          h('p', 'The main wedding page can be found'),
+          h('a.hear', {
+            href:'https://www.theknot.com/us/aly-borawski-and-tj-esposito-nov-2016'},
+            '-here-'),
+          h('br'),
+          h('br'),
+          h('hr.tagline-divider'),
+          h('h2.intro-text.text-center', 'Please leave a note for Aly and TJ below'),
+          h('hr.tagline-divider')
         ]),
         h('.col-lg-12', [
           h('.form-group', [
@@ -97,8 +109,8 @@ module.exports = function (state) {
         h('.col-lg-12', state.msgs.map( function(msg){
           var msg = msg.split(':::')
           return h('div', [
-            h('h3', msg[1]),
-            h('p', 'by: ' + msg[0]),
+            h('h4', msg[1]),
+            h('p', '- ' + msg[0]),
             h('hr')
           ])
         })),

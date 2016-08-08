@@ -69,4 +69,4 @@ require('browserify')()
 //db.createReadStream().on('data', function(data){
 //  console.log(data)
 //})
-//db.del('1470639164956')
+//db.del('1470639167557')

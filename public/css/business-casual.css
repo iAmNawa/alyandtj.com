@@ -53,6 +53,10 @@ hr {
     letter-spacing: 3px;
 }
 
+.navbar-toggle {
+  display: none;
+}
+
 .img-full {
     min-width: 100%;
 }
@@ -112,6 +116,15 @@ footer p {
     padding: 50px 0;
 }
 
+.hear {
+  font-size: 1.3em;
+}
+
+.icon-next, .icon-prev {
+  font-size: 90px !important;
+  margin-top: -21px !important;
+}
+
 /* COUNTDOWN TIMER */
 
 #clockdiv {
@@ -125,7 +138,7 @@ footer p {
   -ms-flex-pack: space-around;
   justify-content: space-around;
   padding: 15px 0px;
-  font-size: 25px;
+  font-size: 15px;
 }
 
 .clockNumber {
@@ -153,7 +166,7 @@ footer p {
   align: center;
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width:575px) {
     .brand {
         display: inherit;
         margin: 0;
@@ -222,7 +235,21 @@ footer p {
         table-layout: fixed;
         font-size: 1.25em;
     }
+
+    #clockdiv {
+      font-size: 25px;
+    }
+
 }
+
+#noPadding {
+  padding: 5px 5px 0px 5px;
+}
+
+#noPadding2 {
+  padding: 0px;
+}
+
 
 @media screen and (min-width:1200px) {
     .box:after {
