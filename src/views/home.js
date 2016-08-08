@@ -87,6 +87,7 @@ module.exports = function (state) {
           h('br'),
           h('hr.tagline-divider'),
           h('h2.intro-text.text-center', 'Please leave a note for Aly and TJ below'),
+          h('h2.intro-text.text-center', 'For problems with the messages contact Paul @ 415-246-0586'),
           h('hr.tagline-divider')
         ]),
         h('.col-lg-12', [
