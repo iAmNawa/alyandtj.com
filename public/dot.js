@@ -2498,6 +2498,75 @@ function tick(){
   loop.update(state)
 }
 
+setTimeout(()=>{
+  $('.carousel').carousel({
+      interval: 4000 //changes the speed
+  })
+  $.ajax({
+    url:'/msgs',
+    type:'get',
+    dataType:'json',
+    success:function (d) {
+      state.msgs = d.all
+      loop.update(state)
+    },
+    error: function(e){
+      console.log('server error:', e)
+    }
+  })
+}, 500)
+
+var textarea = document.querySelector('textarea')
+var input = document.querySelector('input')
+var lastthing = document.querySelector('#thelastthing')
+
+
+window.addEventListener('click', function(e){
+  if (e.target.classList[1] === 'carousel-control') {
+    if (e.target.classList[0] === 'left')
+      return $('.carousel').carousel('prev')
+    return $('.carousel').carousel('next')
+  }
+
+  if (e.target.classList[0] === 'icon-next')
+    return $('.carousel').carousel('next')
+
+  if (e.target.classList[0] === 'icon-prev')
+    return $('.carousel').carousel('prev')
+
+  if (e.target.classList[0] === 'generic')
+    $('.carousel').carousel(Number(e.target['data-slide-to']))
+
+  if (e.target.classList[0] === 'leavemsg') {
+    console.log('clicked the submit msg button')
+    submitter()
+  }
+}, false)
+
+function submitter(){
+  var i = input.value
+  var text = textarea.value
+  $.ajax({
+    url:'/newmessage',
+    type:'post',
+    dataType:'json',
+    data:{
+      msg:text,
+      name:i
+    },
+    success:function (d) {
+    },
+    error: function(e){
+      console.log('server error:', e)
+    }
+  })
+  state.msgs.push(i+':::'+text)
+  loop.update(state)
+  input.value = ''
+  textarea.value =''
+  lastthing.scrollIntoView()
+}
+
 },{"./events":44,"./loop":45,"./state":48}],47:[function(require,module,exports){
 const h = require('virtual-dom/h')
 const ee = require('./events')
@@ -2508,15 +2577,16 @@ module.exports = render
 
 function render (state) {
   return h('div', [
-    h('nav',
-      state.pages.map( page => h('p' + (state.page === page
-        ? '.active' : ''), {
-          onclick: function(e){
-            state.page = page
-            ee.emit('update', state)
-          }
-        }, page) ) ),
-    view[state.page](state)
+    //h('nav',
+    //  state.pages.map( page => h('p' + (state.page === page
+    //    ? '.active' : ''), {
+    //      onclick: function(e){
+    //        state.page = page
+    //        ee.emit('update', state)
+    //      }
+    //    }, page) ) ),
+    //view[state.page](state)
+    view.home(state)
   ])
 }
 
@@ -2532,7 +2602,8 @@ module.exports = {
   hours:0,
   mins:0,
   secs:0,
-  total:0
+  total:0,
+  msgs:[]
 }
 
 },{}],49:[function(require,module,exports){
@@ -2555,7 +2626,7 @@ module.exports = function (state) {
   return h('div', [
     h('.brand', 'Aly & TJ'),
     h('.address-bar', 'Countdown to the wedding of Alyson Julia and Thomas Joshua'),
-    h('.navbar.navbar-default', {role:'navigation'}, [
+    h('nav.navbar.navbar-default', {role:'navigation'}, [
       h('.container', [
         h('.navbar-header', [
           h('button.navbar-toggle', {
@@ -2582,22 +2653,80 @@ module.exports = function (state) {
         ])
       ])
     ]),
-    h('h1', [
-      h('span', 'mookie pookie bookie: '),
-      h('span', String(state.count))
+    h('.container', [
+      h('.row.box', h('.col-lg-12.text-center', [
+        h('#carousel-example-generic.carousel.slide', [
+          h('ol.carousel-indicators.hidden-xs', [
+            h('li.generic.active', {'data-target':'#carousel-example-generic', 'data-slide-to':'0'}),
+            h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'1'}),
+            h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'2'}),
+            h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'3'}),
+          ]),
+          h('.carousel-inner', [
+            h('.item.active', h('img.img-responsive.img-full', {src:'/img/one.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/two.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/three.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/four.jpeg',alt:''}))
+          ]),
+          h('a.left.carousel-control', {
+            //href:'#carousel-example-generic',
+            //'data-slide':'prev',
+            click: function(e){
+              console.log('hello, prev')
+              //$('.carousel').carousel('prev')
+            }
+          }, h('span.icon-prev')),
+          h('a.right.carousel-control', {
+            //href:'#carousel-example-generic',
+            //'data-slide':'next',
+            click: function(e){
+              console.log('hello, next')
+              //$('.carousel').carousel('next')
+            }
+          }, h('span.icon-next'))
+        ]),
+        h('h2.brand-before', h('small', 'The Future')),
+        h('h1.brand-name', 'Mr. & Mrs.'),
+        h('#noteBelow', 'PLEASE LEAVE A NOTE FOR ALY AND TJ BELOW.'),
+        h('hr.tagline-divider'),
+        h('h2', h('small', [
+          'By ',
+          h('strong', 'Paul Borawski')
+        ]))
+      ])),
+      h('.row.box', [
+        h('.col-lg-12.text-center', [
+          h('h3', 'reminder to update other stuff')
+        ]),
+        h('.col-lg-12', [
+          h('.form-group', [
+            h('label', 'message'),
+            h('textarea.form-control')
+          ]),
+          h('.form-group', [
+            h('label', 'name'),
+            h('input.form-control')
+          ]),
+          h('button.leavemsg.btn.btn-default', {
+            click:function (e) {
+              console.log(e);
+            }
+          },'Submit')
+        ]),
+      ]),
+      h('.row.box', [
+        h('.col-lg-12', state.msgs.map( function(msg){
+          var msg = msg.split(':::')
+          return h('div', [
+            h('h3', msg[1]),
+            h('p', 'by: ' + msg[0]),
+            h('hr')
+          ])
+        })),
+        h('#thelastthing.col-lg-12')
+      ]),
     ]),
-    h('button', {
-      onclick: function(e){
-        state.count++
-        ee.emit('update', state)
-      }
-    }, 'truukie it up by 1'),
-    h('button', {
-      onclick: function(e){
-        state.count--
-        ee.emit('update', state)
-      }
-    }, 'truukie her down'),
+    h('footer', h('.container', h('.row', h('.col-lg-12.text-center', h('p', 'Copyright © alyandtj.com 2016'))))),
   ])
 }
 

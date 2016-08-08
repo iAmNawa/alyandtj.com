@@ -2,8 +2,10 @@ const readFileSync      = require('fs').readFileSync
 const writeFile         = require('fs').writeFile
 const stylus            = require('stylus')
 const join              = require('path').join
-
 const port = 9400;
+
+var levelup = require('level')
+var db = levelup('./posts')
 
 
 
@@ -15,9 +17,32 @@ app.use(require('body-parser').urlencoded({ extended:true }));
 app.use(require('stylus').middleware(require('path').join(__dirname, 'public')));
 app.use(require('express').static('public'));
 
-//app.get('/', function (req, res) {
-//  res.send('nawascript');
-//});
+app.get('/msgs', function (req, res) {
+  var allmsgs = []
+  db.createReadStream()
+  .on('data', function (data) {
+    allmsgs.push(data.value)
+  })
+  .on('error', function (err) {
+    console.log('Oh my!', err)
+  })
+  .on('close', function () {
+    console.log('Stream closed')
+  })
+  .on('end', function () {
+    console.log('Stream closed');
+    res.json({
+      all:allmsgs
+    })
+  })
+});
+
+
+app.post('/newmessage', function (req, res) {
+  console.log(req.body);
+  db.put(String(Date.now()), req.body.name + ':::' + req.body.msg)
+  res.json({nice:'nawascript'});
+});
 
 
 require('http').createServer(app).listen(port,function(){

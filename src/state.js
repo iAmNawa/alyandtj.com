@@ -9,5 +9,6 @@ module.exports = {
   hours:0,
   mins:0,
   secs:0,
-  total:0
+  total:0,
+  msgs:[]
 }
