@@ -1,0 +1,26 @@
+body {
+  background-color: rgba(55,55,55,0.2);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  font-family: Helvetica, sans-serif;
+}
+nav p {
+  cursor: pointer;
+  color: #1e1e1e;
+  display: inline;
+  margin: 10px 5px;
+}
+nav p:hover {
+  color: #555;
+}
+nav .active {
+  color: #f00;
+}
+nav .active:hover {
+  color: #f00;
+}
