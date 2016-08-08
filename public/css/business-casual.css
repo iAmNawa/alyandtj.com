@@ -139,8 +139,12 @@ footer p {
   border-color: black;
   border-radius: 4px;
   padding: 10px 10px;
-  background-color: white; 
+  background-color: white;
   color: #2D78A9;
+}
+
+#noteBelow {
+  font-size: 20px;
 }
 
 @media screen and (min-width:768px) {
