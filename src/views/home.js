@@ -40,7 +40,7 @@ module.exports = function (state) {
             h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'3'}),
           ]),
           h('.carousel-inner', [
-            h('.item.active', h('img.img-responsive.img-full', {src:'/img/one.jpg',alt:''})),
+            h('.item.active', h('img.img-responsive.img-full', {src:'/img/oneee.jpeg',alt:''})),
             h('.item', h('img.img-responsive.img-full', {src:'/img/two.jpg',alt:''})),
             h('.item', h('img.img-responsive.img-full', {src:'/img/three.jpg',alt:''})),
             h('.item', h('img.img-responsive.img-full', {src:'/img/four.jpeg',alt:''}))
