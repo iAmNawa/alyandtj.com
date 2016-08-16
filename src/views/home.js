@@ -38,9 +38,11 @@ module.exports = function (state) {
             h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'1'}),
             h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'2'}),
             h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'3'}),
+            h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'4'}),
           ]),
           h('.carousel-inner', [
-            h('.item.active', h('img.img-responsive.img-full', {src:'/img/origin.jpg',alt:''})),
+            h('.item.active', h('img.img-responsive.img-full', {src:'/img/alyone.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/origin.jpg',alt:''})),
             h('.item', h('img.img-responsive.img-full', {src:'/img/thisisone.jpg',alt:''})),
             h('.item', h('img.img-responsive.img-full', {src:'/img/workplease.jpg',alt:''})),
             h('.item', h('img.img-responsive.img-full', {src:'/img/no.jpg',alt:''}))
@@ -118,6 +120,6 @@ module.exports = function (state) {
         h('#thelastthing.col-lg-12')
       ]),
     ]),
-    h('footer', h('.container', h('.row', h('.col-lg-12.text-center', h('p', 'Copyright © alyandtj.com 2016'))))),
+    h('footer', h('.container', h('.row', h('.col-lg-12.text-center', h('p', 'Proudly made by Paul in 2016'))))),
   ])
 }
