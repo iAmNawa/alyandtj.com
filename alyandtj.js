@@ -2,13 +2,11 @@ const readFileSync      = require('fs').readFileSync
 const writeFile         = require('fs').writeFile
 const stylus            = require('stylus')
 const join              = require('path').join
-const port = 9400;
+const schedule          = require('node-schedule')
+const backup            = require('./lib/backups')
+const port              = 9400;
 
-var levelup = require('level')
-var db = levelup('./posts')
-
-
-
+var db = require('level')('./posts')
 var app = require('express')();
 
 app.use(require('compression')());
@@ -63,6 +61,11 @@ require('browserify')()
   .pipe(require('fs').createWriteStream('public/dot.js'))
 
 
+var rule = new schedule.RecurrenceRule()
+rule.hour = 4
+backup(rule)
+
+
 
 
 //// some deleting
@@ -70,3 +73,4 @@ db.createReadStream().on('data', function(data){
   console.log(data)
 })
 //db.del('1470639167557')
+// mookie

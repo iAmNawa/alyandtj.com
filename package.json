@@ -4,7 +4,9 @@
     "browserify":"",
     "compression":"",
     "express":"",
+    "level":"",
     "main-loop":"",
+    "node-schedule":"",
     "stylus":"",
     "virtual-dom":""
   }
