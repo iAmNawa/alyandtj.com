@@ -2527,7 +2527,7 @@ window.addEventListener('click', function(e){
       return $('.carousel').carousel('prev')
     return $('.carousel').carousel('next')
   }
-  
+
   if (e.target.classList[0] === 'icon-next')
     return $('.carousel').carousel('next')
 
@@ -2662,10 +2662,10 @@ module.exports = function (state) {
             h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'3'}),
           ]),
           h('.carousel-inner', [
-            h('.item.active', h('img.img-responsive.img-full', {src:'/img/one.jpg',alt:''})),
-            h('.item', h('img.img-responsive.img-full', {src:'/img/two.jpg',alt:''})),
-            h('.item', h('img.img-responsive.img-full', {src:'/img/three.jpg',alt:''})),
-            h('.item', h('img.img-responsive.img-full', {src:'/img/four.jpeg',alt:''}))
+            h('.item.active', h('img.img-responsive.img-full', {src:'/img/origin.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/thisisone.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/workplease.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/no.jpg',alt:''}))
           ]),
           h('a.left.carousel-control', {
             //href:'#carousel-example-generic',
@@ -2693,7 +2693,7 @@ module.exports = function (state) {
           h('strong', 'Paul Borawski')
         ]))
       ])),
-      h('.row.box', [
+      h('#noPadding3.row.box', [
         h('.col-lg-12.text-center', [
           h('hr.tagline-divider'),
           h('h2.intro-text.text-center', 'Alyson Julia Borawski and Thomas Joshua Esposito'),

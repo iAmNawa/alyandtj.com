@@ -31,7 +31,7 @@ module.exports = function (state) {
       ])
     ]),
     h('.container', [
-      h('#noPadding.row.box', h('#noPadding2.col-lg-12.text-center', [
+      h('#noPadding.stopIt.row.box', h('#noPadding2.col-lg-12.text-center', [
         h('#carousel-example-generic.carousel.slide', [
           h('ol.carousel-indicators.hidden-xs', [
             h('li.generic.active', {'data-target':'#carousel-example-generic', 'data-slide-to':'0'}),
@@ -40,10 +40,10 @@ module.exports = function (state) {
             h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'3'}),
           ]),
           h('.carousel-inner', [
-            h('.item.active', h('img.img-responsive.img-full', {src:'/img/oneee.jpeg',alt:''})),
-            h('.item', h('img.img-responsive.img-full', {src:'/img/two.jpg',alt:''})),
-            h('.item', h('img.img-responsive.img-full', {src:'/img/three.jpg',alt:''})),
-            h('.item', h('img.img-responsive.img-full', {src:'/img/four.jpeg',alt:''}))
+            h('.item.active', h('img.img-responsive.img-full', {src:'/img/origin.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/thisisone.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/workplease.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/no.jpg',alt:''}))
           ]),
           h('a.left.carousel-control', {
             //href:'#carousel-example-generic',
@@ -71,7 +71,7 @@ module.exports = function (state) {
           h('strong', 'Paul Borawski')
         ]))
       ])),
-      h('.row.box', [
+      h('.stopIt.row.box', [
         h('.col-lg-12.text-center', [
           h('hr.tagline-divider'),
           h('h2.intro-text.text-center', 'Alyson Julia Borawski and Thomas Joshua Esposito'),
@@ -106,7 +106,7 @@ module.exports = function (state) {
           },'Submit')
         ]),
       ]),
-      h('.row.box', [
+      h('.stopIt.row.box', [
         h('.col-lg-12', state.msgs.map( function(msg){
           var msg = msg.split(':::')
           return h('div', [
