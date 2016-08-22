@@ -36,6 +36,7 @@ app.get('/msgs', function (req, res) {
 });
 
 
+
 app.post('/newmessage', function (req, res) {
   console.log(req.body);
   db.put(String(Date.now()), req.body.name + ':::' + req.body.msg)
