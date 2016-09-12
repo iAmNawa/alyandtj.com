@@ -120,6 +120,6 @@ module.exports = function (state) {
         h('#thelastthing.col-lg-12')
       ]),
     ]),
-    h('footer', h('.container', h('.row', h('.col-lg-12.text-center', h('p', 'Proudly made by Paul in 2016', h('a.btn-twitter')))))),
+    h('footer', h('.container', h('.row', h('.col-lg-12.text-center', h('p', 'Proudly made by Paul in 2016'))))),
   ])
 }
