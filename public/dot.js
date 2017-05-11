@@ -2759,7 +2759,8 @@ module.exports = function (state) {
       ])),
       h('.stopIt.row.box', [
         h('.col-lg-12.text-center', [
-          h('h2.intro-text.text-center', 'Alyson Julia Borawski and Thomas Joshua Esposito'),
+          h('h2.intro-text.text-center', 'Check out the wedding video here'),
+          h('div', { innerHTML: "<iframe src='https://player.vimeo.com/video/207156155' width='640' height='360' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href='https://vimeo.com/207156155'>AlyTjWeddingFinal</a> from <a href='https://vimeo.com/user63777007'>Paul Borawski</a> on <a href='https://vimeo.com'>Vimeo</a>.</p>" })
         ]),
       ]),
       h('.stopIt.row.box', [
