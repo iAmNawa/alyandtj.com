@@ -551,17 +551,19 @@ var topLevel = typeof global !== 'undefined' ? global :
     typeof window !== 'undefined' ? window : {}
 var minDoc = require('min-document');
 
+var doccy;
+
 if (typeof document !== 'undefined') {
-    module.exports = document;
+    doccy = document;
 } else {
-    var doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'];
+    doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'];
 
     if (!doccy) {
         doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'] = minDoc;
     }
-
-    module.exports = doccy;
 }
+
+module.exports = doccy;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"min-document":1}],8:[function(require,module,exports){
@@ -752,35 +754,83 @@ var process = module.exports = {};
 var cachedSetTimeout;
 var cachedClearTimeout;
 
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
 (function () {
     try {
-        cachedSetTimeout = setTimeout;
-    } catch (e) {
-        cachedSetTimeout = function () {
-            throw new Error('setTimeout is not defined');
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
         }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
     }
     try {
-        cachedClearTimeout = clearTimeout;
-    } catch (e) {
-        cachedClearTimeout = function () {
-            throw new Error('clearTimeout is not defined');
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
         }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
     }
 } ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
         return setTimeout(fun, 0);
-    } else {
-        return cachedSetTimeout.call(null, fun, 0);
     }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
 }
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
-        clearTimeout(marker);
-    } else {
-        cachedClearTimeout.call(null, marker);
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
     }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
 }
 var queue = [];
 var draining = false;
@@ -863,6 +913,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -2480,8 +2534,6 @@ const loop      = require('./loop')
 
 
 
-
-
 document.body.appendChild(loop.target)
 
 // update the main-loop
@@ -2491,10 +2543,10 @@ setInterval(tick, 1000)
 
 function tick(){
   var t = Date.parse('November 11 2016 16:45:00 UTC-0400') - Date.parse(new Date())
-  state.secs = Math.floor( (t/1000) % 60 )
-  state.mins = Math.floor( (t/1000/60) % 60 )
-  state.hours = Math.floor( (t/(1000*60*60)) % 24 )
-  state.days = Math.floor( t/(1000*60*60*24) )
+  state.secs = Math.floor( ((t/1000) % 60) * -1 )
+  state.mins = Math.floor( ((t/1000/60) % 60) * -1 )
+  state.hours = Math.floor( ((t/(1000*60*60)) % 24) * -1 )
+  state.days = Math.floor( (t/(1000*60*60*24)) * -1 )
   loop.update(state)
 }
 
@@ -2617,16 +2669,26 @@ module.exports = function (state) {
   ])
 }
 
+//
+
 },{"../events":44,"virtual-dom/h":18}],50:[function(require,module,exports){
-arguments[4][49][0].apply(exports,arguments)
-},{"../events":44,"dup":49,"virtual-dom/h":18}],51:[function(require,module,exports){
+const h = require('virtual-dom/h')
+const ee = require('../events')
+
+module.exports = function (state) {
+  return h('div', [
+    h('h1', 'the ' + state.page + ' page')
+  ])
+}
+
+},{"../events":44,"virtual-dom/h":18}],51:[function(require,module,exports){
 const h = require('virtual-dom/h')
 const ee = require('../events')
 
 module.exports = function (state) {
   return h('div', [
     h('.brand', 'Aly & TJ'),
-    h('.address-bar', 'Countdown to the wedding of Alyson Julia and Thomas Joshua'),
+    h('.address-bar', 'Days since the wedding of Thomas Joshua and Alyson Julia'),
     h('nav.navbar.navbar-default', {role:'navigation'}, [
       h('.container', [
         h('.navbar-header', [
@@ -2653,16 +2715,18 @@ module.exports = function (state) {
       ])
     ]),
     h('.container', [
-      h('#noPadding.row.box', h('#noPadding2.col-lg-12.text-center', [
+      h('#noPadding.stopIt.row.box', h('#noPadding2.col-lg-12.text-center', [
         h('#carousel-example-generic.carousel.slide', [
           h('ol.carousel-indicators.hidden-xs', [
             h('li.generic.active', {'data-target':'#carousel-example-generic', 'data-slide-to':'0'}),
             h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'1'}),
             h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'2'}),
             h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'3'}),
+            h('li.generic', {'data-target':'#carousel-example-generic', 'data-slide-to':'4'}),
           ]),
           h('.carousel-inner', [
-            h('.item.active', h('img.img-responsive.img-full', {src:'/img/origin.jpg',alt:''})),
+            h('.item.active', h('img.img-responsive.img-full', {src:'/img/alyone.jpg',alt:''})),
+            h('.item', h('img.img-responsive.img-full', {src:'/img/origin.jpg',alt:''})),
             h('.item', h('img.img-responsive.img-full', {src:'/img/thisisone.jpg',alt:''})),
             h('.item', h('img.img-responsive.img-full', {src:'/img/workplease.jpg',alt:''})),
             h('.item', h('img.img-responsive.img-full', {src:'/img/no.jpg',alt:''}))
@@ -2693,7 +2757,7 @@ module.exports = function (state) {
           h('strong', 'Paul Borawski')
         ]))
       ])),
-      h('#noPadding3.row.box', [
+      h('.stopIt.row.box', [
         h('.col-lg-12.text-center', [
           h('hr.tagline-divider'),
           h('h2.intro-text.text-center', 'Alyson Julia Borawski and Thomas Joshua Esposito'),
@@ -2709,6 +2773,7 @@ module.exports = function (state) {
           h('br'),
           h('hr.tagline-divider'),
           h('h2.intro-text.text-center', 'Please leave a note for Aly and TJ below'),
+          h('h2.intro-text.text-center', 'For problems with the messages contact Paul @ 415-246-0586'),
           h('hr.tagline-divider')
         ]),
         h('.col-lg-12', [
@@ -2727,7 +2792,7 @@ module.exports = function (state) {
           },'Submit')
         ]),
       ]),
-      h('.row.box', [
+      h('.stopIt.row.box', [
         h('.col-lg-12', state.msgs.map( function(msg){
           var msg = msg.split(':::')
           return h('div', [
@@ -2739,7 +2804,7 @@ module.exports = function (state) {
         h('#thelastthing.col-lg-12')
       ]),
     ]),
-    h('footer', h('.container', h('.row', h('.col-lg-12.text-center', h('p', 'Copyright © alyandtj.com 2016'))))),
+    h('footer', h('.container', h('.row', h('.col-lg-12.text-center', h('p', 'Proudly made by Paul in 2016'))))),
   ])
 }
 

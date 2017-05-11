@@ -20,10 +20,10 @@ setInterval(tick, 1000)
 
 function tick(){
   var t = Date.parse('November 11 2016 16:45:00 UTC-0400') - Date.parse(new Date())
-  state.secs = Math.floor( (t/1000) % 60 )
-  state.mins = Math.floor( (t/1000/60) % 60 )
-  state.hours = Math.floor( (t/(1000*60*60)) % 24 )
-  state.days = Math.floor( t/(1000*60*60*24) )
+  state.secs = Math.floor( ((t/1000) % 60) * -1 )
+  state.mins = Math.floor( ((t/1000/60) % 60) * -1 )
+  state.hours = Math.floor( ((t/(1000*60*60)) % 24) * -1 )
+  state.days = Math.floor( (t/(1000*60*60*24)) * -1 )
   loop.update(state)
 }
 

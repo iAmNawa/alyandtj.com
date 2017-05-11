@@ -4,7 +4,7 @@ const ee = require('../events')
 module.exports = function (state) {
   return h('div', [
     h('.brand', 'Aly & TJ'),
-    h('.address-bar', 'Countdown to the wedding of Alyson Julia and Thomas Joshua'),
+    h('.address-bar', 'Days since the wedding of Thomas Joshua and Alyson Julia'),
     h('nav.navbar.navbar-default', {role:'navigation'}, [
       h('.container', [
         h('.navbar-header', [
