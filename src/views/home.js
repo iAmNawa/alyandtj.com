@@ -75,6 +75,11 @@ module.exports = function (state) {
       ])),
       h('.stopIt.row.box', [
         h('.col-lg-12.text-center', [
+          h('h2.intro-text.text-center', 'Alyson Julia Borawski and Thomas Joshua Esposito'),
+        ]),
+      ]),
+      h('.stopIt.row.box', [
+        h('.col-lg-12.text-center', [
           h('hr.tagline-divider'),
           h('h2.intro-text.text-center', 'Alyson Julia Borawski and Thomas Joshua Esposito'),
           h('hr.tagline-divider'),
