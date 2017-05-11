@@ -6,3 +6,5 @@ module.exports = function (state) {
     h('h1', 'the ' + state.page + ' page')
   ])
 }
+
+//

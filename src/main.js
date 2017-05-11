@@ -11,8 +11,6 @@ const loop      = require('./loop')
 
 
 
-
-
 document.body.appendChild(loop.target)
 
 // update the main-loop
@@ -58,7 +56,7 @@ window.addEventListener('click', function(e){
       return $('.carousel').carousel('prev')
     return $('.carousel').carousel('next')
   }
-  
+
   if (e.target.classList[0] === 'icon-next')
     return $('.carousel').carousel('next')
 
