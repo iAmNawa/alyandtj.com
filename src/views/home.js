@@ -64,7 +64,7 @@ module.exports = function (state) {
             }
           }, h('span.icon-next'))
         ]),
-        h('h2.brand-before', h('small', 'The Future')),
+        h('h2.brand-before', h('small', 'The Current')),
         h('h1.brand-name', 'Mr. & Mrs.'),
         h('#noteBelow', 'PLEASE LEAVE A NOTE FOR ALY AND TJ BELOW.'),
         h('hr.tagline-divider'),
