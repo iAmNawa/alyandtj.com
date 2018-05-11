@@ -1,8 +1,11 @@
-# Aly and TJ
+# VirtualDOM
+This site uses virtual-dom, a JavaScript DOM model supporting element creation, diff computation and patch operations for efficient re-rendering.
+
+# Link to the virtual-dom repo
+- https://github.com/Matt-Esch/virtual-dom
+
+# alyandtj.com
 This is a countdown timer and website for Aly and TJ.
-This site uses react-like virtual-dom.
-Virtual-dom on this site is used to be able to leave your name and a comment
-and submit the result without re-rendering the entire DOM.
 
 # Contact
 
